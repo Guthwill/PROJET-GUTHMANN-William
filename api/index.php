@@ -8,6 +8,26 @@ require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
+$options = [
+    "attribute" => "token",
+    "header" => "Authorization",
+    "regexp" => "/Bearer\s+(.*)$/i",
+    "secure" => false,
+    "algorithm" => ["HS256"],
+    "secret" => JWT_SECRET,
+    "path" => ["/api"],
+    "ignore" => ["/api/hello","/api/login","/api/createUser"],
+    "error" => function ($response, $arguments) {
+    $data = array('ERREUR' => 'Connexion', 'ERREUR' => 'JWT Non
+
+    valide');
+
+    $response = $response->withStatus(401);
+    return $response->withHeader("Content-Type",
+    "application/json")->getBody()->write(json_encode($data));
+    }
+];
+
 $app->get('/hello/{name}',
     function (Request $request, Response $response, $args) {
         $array = [];
@@ -16,7 +36,16 @@ $app->get('/hello/{name}',
         return $response->getBody()->write(json_encode($array));
 
     });
-echo("launch");
-$app->addRoutingMiddleware();
 
+$app->get('/api/hello/{name}',
+function (Request $request, Response $response, $args) {
+    $array = [];
+
+    $array ["nom"] = $args["name"];
+    return $response->getBody()->write(json_encode($array));
+
+});
+
+echo("launch");
+$app->add(new Tuupola\Middleware\JwtAuthentication($options));
 $app->run();
