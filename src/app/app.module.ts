@@ -18,11 +18,13 @@ import { ArticleService } from './service/article.service';
 import { PanierState } from '../shared/states/panier-state';
 import { BtnAddPanierComponent } from './btn-add-panier/btn-add-panier.component';
 import { DetailArticleComponent } from './detail-article/detail-article.component';
+import { ConnexionComponent } from './connexion/connexion.component';
 
 const appRoutes: Routes = [
   // { path: '', component: HomeComponent },
   { path: '', component: CatalogueComponent },
   { path: 'formulaire', component: FormulaireComponent },
+  { path: 'connexion', component: ConnexionComponent },
   { path: 'catalogue', component: CatalogueComponent },
   { path: 'catalogue/:ref', component: DetailArticleComponent },
   { path: 'panier', component: PanierComponent }
@@ -39,7 +41,8 @@ const appRoutes: Routes = [
     HomeComponent,
     ArticleComponent,
     BtnAddPanierComponent,
-    DetailArticleComponent
+    DetailArticleComponent,
+    ConnexionComponent
   ],
   imports: [
     BrowserModule,

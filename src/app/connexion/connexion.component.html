@@ -1,0 +1,14 @@
+<h2>Connexion</h2>
+
+<div>
+    <label>Email : </label> <input [(ngModel)]="email"/>
+    <div *ngIf = "!regEx3.test(email)">Corriger l'adresse mail</div>
+
+    <br/><label>Pseudo : </label> <input [(ngModel)]="pseudo"/>
+    <div *ngIf = "!regEx1.test(pseudo)">Corriger le pseudo</div>
+
+    <br/><label>Mot de passe : </label> <input [(ngModel)]="password"/>
+    <div *ngIf = "!regEx2.test(password)">Seisir le mot de passe</div>
+
+    <br/><br/><button [disabled]="!regEx1.test(pseudo)&&!regEx2.test(password)&&!regEx3.test(email)">Enregistrer</button>
+</div>

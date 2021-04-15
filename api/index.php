@@ -12,6 +12,17 @@ $app = AppFactory::create();
 
 const JWT_SECRET = "123456";
 
+function addCorsHeaders (Response $response) : Response {
+
+    $response =  $response
+    ->withHeader("Access-Control-Allow-Origin", 'http://localhost')
+    ->withHeader("Access-Control-Allow-Headers" ,'Content-Type, Authorization')
+    ->withHeader("Access-Control-Allow-Methods", 'GET, POST, PUT, PATCH, DELETE,OPTIONS')
+    ->withHeader ("Access-Control-Expose-Headers" , "Authorization");
+
+    return $response;
+}
+
 $options = [
     "attribute" => "token",
     "header" => "Authorization",
@@ -28,22 +39,62 @@ $options = [
     }
 ];
 
-$app->get('/hello/{name}',
-    function (Request $request, Response $response, $args) {
-        $array = [];
+$app->post('/api/login', function (Request $request, Response $response, $args) {
+    $issuedAt = time();
+    $expirationTime = $issuedAt + 60;
+    $payload = array(
+        'userid' => "12345",
+        'email' => "emmanuel.maurice@gmail.com",
+        'pseudo' => "emma",
+        'iat' => $issuedAt,
+        'exp' => $expirationTime
+    );
 
-        $array ["nom"] = $args["name"];
-        return $response->getBody()->write(json_encode($array));
+    $token_jwt = JWT::encode($payload,JWT_SECRET, "HS256");
+    $response = $response->withHeader("Authorization", "Bearer {$token_jwt}");
+    return $response;
+});
 
-    });
 
-$app->get('/api/hello/{name}',
-function (Request $request, Response $response, $args) {
+
+
+$app->get('/api/catalogue', function (Request $request, Response $response, $args) {
+    $flux = '[
+        {"ref":"x1","titre":"linux","prix":10},
+        {"ref":"x2,","titre":"windows","prix":15},
+        {"ref":"x3","titre":"angular","prix":5}
+    ]';
+    
+    $response = $response
+    ->withHeader("Content-Type", "application/json;charset=utf-8");
+    
+    $response->getBody()->write($flux);
+    return $response;
+});
+
+
+$app->get('/api/client/{id}', function (Request $request, Response $response, $args) {
     $array = [];
+    $array ["nom"] = "maurice";
+    $array ["prenom"] = "emmanuel";
+    
+    $response->getBody()->write(json_encode ($array));
+    return $response;
+});
 
-    $array ["nom"] = $args["name"];
-    return $response->getBody()->write(json_encode($array));
+$app->get('/hello/{name}', function (Request $request, Response $response, $args) {
+    $array = [];
+    $array ["nom"] = $args ['name'];
+    $response->getBody()->write(json_encode ($array));
+    return $response;
+});
 
+
+$app->get('/api/hello/{name}', function (Request $request, Response $response, $args) {
+    $array = [];
+    $array ["nom"] = $args ['name'];
+    $response->getBody()->write(json_encode ($array));
+    return $response;
 });
 
 echo("launch");

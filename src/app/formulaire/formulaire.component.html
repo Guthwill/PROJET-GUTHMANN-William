@@ -6,6 +6,12 @@
     <br/>
     <label>Nom : </label> <input [(ngModel)]="nom"/>
     <div *ngIf = "!regEx1.test(nom)">Corriger le  prenom</div>
+    <br/>
+    <label>Email : </label> <input [(ngModel)]="email"/>
+    <div *ngIf = "!regEx4.test(email)">Corriger l'adresse mail</div>
+    <br/>
+    <label>Pseudo : </label> <input [(ngModel)]="pseudo"/>
+    <div *ngIf = "!regEx1.test(pseudo)">Corriger le pseudo</div>
 
     <br/><label>Adresse : </label> <input [(ngModel)]="adresse"/>
     <div *ngIf = "!regEx2.test(adresse)">Corriger le champ adresse</div>
