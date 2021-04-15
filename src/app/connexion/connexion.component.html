@@ -10,5 +10,5 @@
     <br/><label>Mot de passe : </label> <input [(ngModel)]="password"/>
     <div *ngIf = "!regEx2.test(password)">Seisir le mot de passe</div>
 
-    <br/><br/><button [disabled]="!regEx1.test(pseudo)&&!regEx2.test(password)&&!regEx3.test(email)" (click)="submit()">Enregistrer</button>
+    <br/><br/><button [disabled]="!regEx1.test(pseudo)&&!regEx2.test(password)&&!regEx3.test(email)">Enregistrer</button>
 </div>

@@ -1,4 +1,4 @@
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, Input } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -28,7 +28,7 @@ export class ConnexionComponent implements OnInit {
     
   }
 
-  public login(login : string, password : string) : Observable<any> {
+  login(login : string, password : string) : Observable<any> {
     let httpOptions = {
       headers :  new HttpHeaders ({'Content-Type':'application/json'})};
 
