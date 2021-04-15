@@ -8,8 +8,10 @@
   </div>
 
   <ul>
-    <li (click)="delReference(panierElement.ref)" *ngFor='let panierElement of pe'>{{ panierElement.name }}</li>
+    <li (click)="delReference(panierElement.ref)" *ngFor='let panierElement of pe'>Article {{ panierElement.ref }} : {{ panierElement.name }} - Prix : {{ panierElement.price }}</li>
   </ul>
+
+  <p>Total : <i>{{ totalPrice(pe) }}</i></p>
 </div>
 
 <a [routerLink]="['/catalogue']">Retourner au catalogue</a>
