@@ -27,7 +27,7 @@ export class PanierComponent implements OnInit {
 
   delReference(ref: string) {
     // À corriger : il supprime tous les articles avec la ref, il faut supp par rapport à l'index dans la liste
-    // this.store.dispatch(new RemoveArticle(ref));
+    this.store.dispatch(new RemoveArticle(ref));
   }
 
   totalPrice(panier: any){

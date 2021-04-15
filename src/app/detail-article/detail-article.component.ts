@@ -12,8 +12,9 @@ export class DetailArticleComponent implements OnInit {
 
   // name: string = "";
   // price: number = 0;
-  articleName = new String();
-  articlePrice = new Number();
+  articleRef!: string;
+  articleName!: string;
+  articlePrice!: number;
 
   constructor(private articleService: ArticleService,
     private route: ActivatedRoute) { }
@@ -22,5 +23,6 @@ export class DetailArticleComponent implements OnInit {
     const articleRef = this.route.snapshot.params['ref'];
     this.articleName = String(this.articleService.getArticleByRef(articleRef)?.name);
     this.articlePrice = Number(this.articleService.getArticleByRef(articleRef)?.price);
+    this.articleRef = articleRef;
   }
 }

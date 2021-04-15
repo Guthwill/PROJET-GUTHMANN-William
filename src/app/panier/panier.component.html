@@ -7,8 +7,9 @@
     <i *ngIf="pe.length > 1">Vous avez {{ pe.length }} articles dans votre panier.</i>
   </div>
 
-  <ul>
-    <li (click)="delReference(panierElement.ref)" *ngFor='let panierElement of pe'>Article {{ panierElement.ref }} : {{ panierElement.name }} - Prix : {{ panierElement.price }}</li>
+  <ul *ngFor='let panierElement of pe'>
+    <li >Article {{ panierElement.ref }} : {{ panierElement.name }} - Prix : {{ panierElement.price }}</li>
+    <a (click)="delReference(panierElement.ref)" routerLink="/panier">Supprimer</a>
   </ul>
 
   <p>Total : <i>{{ totalPrice(pe) }}</i></p>

@@ -1,4 +1,7 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, Input } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-connexion',
@@ -7,7 +10,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ConnexionComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store, private httpClient : HttpClient) { }
 
   regEx1 = /[A-Za-z]{2,30}/;
   regEx2 = /[A-Za-z0-9]{2,30}/;
@@ -22,6 +25,15 @@ export class ConnexionComponent implements OnInit {
   error: boolean = true;
 
   ngOnInit(): void {
+    
+  }
+
+  public login(login : string, password : string) : Observable<any> {
+    let httpOptions = {
+      headers :  new HttpHeaders ({'Content-Type':'application/json'})};
+
+    return this.httpClient.post<any> ("/api/login",{"login":login,"password":password},httpOptions);
+    //return this.store.subscribe(jwt);
   }
 
 }
