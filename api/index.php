@@ -23,6 +23,13 @@ function addCorsHeaders (Response $response) : Response {
     return $response;
 }
 
+function options (Request $request, Response $response) {
+    // Evite que le front demande une confirmation à chaque modification
+    $response = $response->withHeader("Access-Control-Max-Age", 60);
+
+    return addHeaders ($response,$request->getHeader('Origin'));
+}
+
 $options = [
     "attribute" => "token",
     "header" => "Authorization",
