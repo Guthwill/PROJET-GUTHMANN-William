@@ -1,4 +1,4 @@
-import { ArticleService } from './../service/article.service';
+import { Observable } from 'rxjs';
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngxs/store';
 
@@ -9,12 +9,11 @@ import { Store } from '@ngxs/store';
 })
 export class ArticleComponent implements OnInit {
 
-  // @Input() articles$!: any[];
   @Input() articleRef!: string;
   @Input() articleName!: string;
   @Input() articlePrice!: number;
 
-  constructor(private articleService: ArticleService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

@@ -4,6 +4,7 @@ import { filter } from 'rxjs/operators';
 import { serializeNodes } from '@angular/compiler/src/i18n/digest';
 import { FormControl } from '@angular/forms';
 import { ArticleService } from '../service/article.service';
+import { Article } from 'src/shared/models/article';
 
 @Component({
   selector: 'app-catalogue',
@@ -13,8 +14,7 @@ import { ArticleService } from '../service/article.service';
 
 export class CatalogueComponent implements OnInit {
 
-
-  articles$!: any[];
+  articles$!: Article[];
 
   articleSubscription!: Subscription;
 
@@ -24,7 +24,7 @@ export class CatalogueComponent implements OnInit {
 
   ngOnInit(): void {
     this.articleSubscription = this.articleService.articleSubject.subscribe(
-      (articles: any[]) => {
+      (articles: Article[]) => {
         this.articles$! = articles;
       }
     );
