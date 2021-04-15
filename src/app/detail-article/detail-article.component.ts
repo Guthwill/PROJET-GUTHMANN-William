@@ -10,16 +10,17 @@ import { ArticleService } from '../service/article.service'
 
 export class DetailArticleComponent implements OnInit {
 
-  name: string = "";
+  // name: string = "";
   // price: number = 0;
-  price = new Number()
+  articleName = new String();
+  articlePrice = new Number();
 
   constructor(private articleService: ArticleService,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const ref: string = this.route.snapshot.params['ref'];
-    this.name = String(this.articleService.getArticleById(ref)?.name);
-    this.price = Number(this.articleService.getArticleById(ref)?.price);
+    const articleRef = this.route.snapshot.params['ref'];
+    this.articleName = String(this.articleService.getArticleByRef(articleRef)?.name);
+    this.articlePrice = Number(this.articleService.getArticleByRef(articleRef)?.price);
   }
 }

@@ -1,10 +1,11 @@
 import { Subject } from 'rxjs';
+import { Article } from '../../shared/models/article'
 
 export class ArticleService {
 
-  articleSubject = new Subject<any[]>();
+  articleSubject = new Subject<Article[]>();
 
-  articles = [
+  articles: Article[] = [
     {
       ref: "Y2LWP95M",
       name: "Linux",
@@ -31,7 +32,7 @@ export class ArticleService {
     this.articleSubject.next(this.articles.slice());
   }
 
-  getArticleById(ref: string) {
+  getArticleByRef(ref: string) {
     const article = this.articles.find(
       (articleObject) => {
         return articleObject.ref === ref;

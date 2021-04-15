@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Action, State, StateContext, Selector } from '@ngxs/store'
-import { AddReference, DelReference } from '../actions/panier.action'
-import { PanierStateModel } from './panier-state-model';
+import { AddArticle, RemoveArticle } from '../actions/panier.action'
+import { Article } from '../models/article';
+import { PanierStateModel } from './article-panier-model';
 
 @State<PanierStateModel>(
   {
@@ -16,30 +17,41 @@ import { PanierStateModel } from './panier-state-model';
 export class PanierState {
 
   @Selector()
-  static getNbReference(state: PanierStateModel) {
-    return state.panier.length;
-  }
-
-  @Selector()
-  static getReferences(state: PanierStateModel) {
+  static getArticles(state: PanierStateModel) {
     return state.panier;
   }
 
-  @Action(AddReference)
-  add(
-    { getState, patchState }: StateContext<PanierStateModel>,
-    { payload }: AddReference) {
-    const state = getState();
-    patchState({ panier: [...state.panier, payload] });
-    console.log(patchState({ panier: [...state.panier, payload] }));
+  @Selector()
+  static getNbArticles(state: PanierStateModel) {
+    return state.panier.length;
   }
 
-  @Action(DelReference)
+  @Action(AddArticle)
+  add(
+    { getState, patchState }: StateContext<PanierStateModel>,
+    { payload }: AddArticle) {
+    const state = getState();
+    console.log(payload);
+    patchState({
+      panier: [...state.panier, payload]
+    });
+  }
+
+  // @Action(RemoveArticle)
+  // del(
+  //   { getState, patchState }: StateContext<PanierStateModel>,
+  //   { payload }: RemoveArticle) {
+  //   const state = getState();
+  //   // TODO : Supprimer la référence passée en paramètre
+  //   patchState({ panier: [...state.panier] });
+  // }
+
+  @Action(RemoveArticle)
   del(
     { getState, patchState }: StateContext<PanierStateModel>,
-    { payload }: DelReference) {
-    const state = getState();
-    // TODO : Supprimer la référence passée en paramètre
-    patchState({ panier: [...state.panier] });
+    { payload }: RemoveArticle) {
+    patchState({
+      panier: getState().panier.filter(x => x.ref != payload)
+    });
   }
 }

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { AddReference } from '../../shared/actions/panier.action';
+import { AddArticle } from '../../shared/actions/panier.action';
 
 @Component({
   selector: 'app-btn-add-panier',
@@ -9,7 +9,6 @@ import { AddReference } from '../../shared/actions/panier.action';
 })
 export class BtnAddPanierComponent implements OnInit {
 
-  // @Input() articles$!: any[];
   @Input() articleRef!: string;
   @Input() articleName!: string;
   @Input() articlePrice!: number;
@@ -20,7 +19,6 @@ export class BtnAddPanierComponent implements OnInit {
   }
 
   addPanier(ref: string, name: string, price: number) {
-    this.store.dispatch(new AddReference({'ref': ref, 'name': name, 'price': price}))
-    console.log(ref);
+    this.store.dispatch(new AddArticle({ref: this.articleRef, name: this.articleName, price: this.articlePrice}));
   }
 }
