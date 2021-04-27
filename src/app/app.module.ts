@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
 
@@ -20,6 +19,8 @@ import { BtnAddPanierComponent } from './btn-add-panier/btn-add-panier.component
 import { DetailArticleComponent } from './detail-article/detail-article.component';
 import { ConnexionComponent } from './connexion/connexion.component';
 import {AuthGuardGuard } from './auth-guard.guard';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ApiHttpInterceptor } from './api-http-interceptor';
 
 const appRoutes: Routes = [
   // { path: '', component: HomeComponent },
@@ -57,6 +58,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     ArticleService,
+    {provide: HTTP_INTERCEPTORS, useClass: ApiHttpInterceptor, multi: true},
     [AuthGuardGuard]
   ],
   bootstrap: [AppComponent]
