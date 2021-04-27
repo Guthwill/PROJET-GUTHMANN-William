@@ -13,7 +13,6 @@ export class UserService {
     console.log(httpOptions);
 
     return this.httpClient.post<any>("/api/login", { "login": login, "password": password }, httpOptions);
-    // return this.httpClient.post<any>("https://tp05-knittel-kevin.herokuapp.com/api/login", { "login": login, "password": password }, httpOptions);
   }
 
   getToken() {
