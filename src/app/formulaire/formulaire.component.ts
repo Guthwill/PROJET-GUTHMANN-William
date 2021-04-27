@@ -5,6 +5,10 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './formulaire.component.html',
   styleUrls: ['./formulaire.component.css'],
 })
+
+/*
+ * Composant formulaire d'inscription 
+*/
 export class FormulaireComponent implements OnInit {
 
   constructor() { }

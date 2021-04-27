@@ -8,10 +8,11 @@ import { ArticleService } from '../service/article.service'
   styleUrls: ['./detail-article.component.css']
 })
 
+/*
+ * Composant du détail d'un article lorsque l'on clique sur le lien détail
+*/
 export class DetailArticleComponent implements OnInit {
 
-  // name: string = "";
-  // price: number = 0;
   articleRef!: string;
   articleName!: string;
   articlePrice!: number;

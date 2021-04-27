@@ -8,6 +8,10 @@ import { User } from 'src/shared/models/user';
   templateUrl: './connexion.component.html',
   styleUrls: ['./connexion.component.css']
 })
+
+/**
+ * Connexion avec demande d'un JWT
+ */
 export class ConnexionComponent implements OnInit {
 
   constructor(private userService: UserService) { }
@@ -29,17 +33,7 @@ export class ConnexionComponent implements OnInit {
   }
 
   connect() {
-    // console.log (this.login + " " + this.password);
     this.userService.login(this.login, this.password).subscribe(flux => console.log(flux));
   }
-
-  // login(login: string, password: string): Observable<any> {
-  //   let httpOptions = {
-  //     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  //   };
-
-  //   return this.httpClient.post<any>("/api/login", { "login": login, "password": password }, httpOptions);
-  //   //return this.store.subscribe(jwt);
-  // }
 }
 
