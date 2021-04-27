@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://projet-guthmann-william.herokuapp.com',
+  baseUrl: 'https://projet-guthmann-william.herokuapp.com/api',
 };
 
 /*
