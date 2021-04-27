@@ -1,31 +1,31 @@
 <?php
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use \Firebase\JWT\JWT;
+use Slim\App;
+use Tuupola\Middleware\HttpBasicAuthentication;
+use Slim\Container;
 
-  use Psr\Http\Message\ResponseInterface as Response;
-  use Psr\Http\Message\ServerRequestInterface as Request;
+  require '../vendor/autoload.php';
+  require_once '../bootstrap.php';
 
-  use Slim\Factory\AppFactory;
-
-  use Tuupola\Middleware\HttpBasicAuthentication;
-  use \Firebase\JWT\JWT;
-
-  require __DIR__ . '/vendor/autoload.php';
-  require_once __DIR__ . '/bootstrap.php';
-
-  $app = AppFactory::create();
+  $configuration = [
+    'settings' => [
+        'displayErrorDetails' => true,
+        ],
+    ];
+    $c = new Container($configuration);
+    $app = new App($c);
 
   const JWT_SECRET = "makey1234567";
 
-
   function addCorsHeaders(Response $response): Response {
       $response = $response
-      ->withHeader("Access-Control-Allow-Origin", 'http://localhost')
-      ->withHeader("Access-Control-Allow-Headers", 'Content-Type, Authorization')
       ->withHeader("Access-Control-Allow-Methods", 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
       ->withHeader("Access-Control-Expose-Headers", "Authorization");
 
       return $response;
   }
-
 
   // Middleware de validation du Jwt
   $options = [
@@ -38,10 +38,10 @@
       "path" => ["/api"],
       "ignore" => [
         "/hello",
-        "/api/hello",
-        "/api/login",
-        "/api/createUser",
-        "/api/catalogue"
+        "/hello",
+        "/login",
+        "/createUser",
+        "/catalogue"
       ],
       "error" => function ($response, $arguments) {
           $data = array('ERREUR' => 'Connexion', 'ERREUR' => 'JWT Non valide');
@@ -51,7 +51,7 @@
   ];
 
 
-  $app->post('/api/login', function (Request $request, Response $response, $args) {
+  $app->post('/login', function (Request $request, Response $response, $args) {
       $issuedAt = time();
       $expirationTime = $issuedAt + 60; // en secondes
       $payload = array(
@@ -70,30 +70,7 @@
   });
 
 
-  $app->get('/api/catalogue', function (Request $request, Response $response, $args) {
-      // $flux = '[
-      //   {
-      //     ref: "Y2LWP95M",
-      //     name: "Linux",
-      //     price: 10
-      //   },
-      //   {
-      //     ref: "M75CEPTK",
-      //     name: "Windows",
-      //     price: 15
-      //   },
-      //   {
-      //     ref: "75FGMDCX",
-      //     name: "Angular",
-      //     price: 5
-      //   },
-      //   {
-      //     ref: "SX9BG46C",
-      //     name: "Talend",
-      //     price: 0
-      //   },
-      // ]';
-
+  $app->get('/catalogue', function (Request $request, Response $response, $args) {
     global $entityManager;
 
     $articlesRepository = $entityManager->getRepository('Articles');
@@ -119,7 +96,7 @@
   });
 
 
-  $app->get('/api/client/{id}', function (Request $request, Response $response, $args) {
+  $app->get('/client/{id}', function (Request $request, Response $response, $args) {
       $array = [];
       $array ["nom"] = "maurice";
       $array ["prenom"] = "emmanuel";
