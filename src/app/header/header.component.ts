@@ -16,5 +16,5 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.store.select(state => state.panier.panier.length).subscribe(l => this.nbElementPanier = l);
   }
-
 }
+

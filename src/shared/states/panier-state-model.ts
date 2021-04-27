@@ -1,5 +1,5 @@
-import { Reference } from '../models/reference';
+import { Article } from "../models/article";
 
 export class PanierStateModel {
-  panier!: Reference[];
+  panier!: Article[];
 }

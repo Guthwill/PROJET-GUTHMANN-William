@@ -1,19 +1,47 @@
-<h2>Formulaire</h2>
+<h2>Inscription</h2>
 
 <div>
-    <label>Prenom : </label> <input [(ngModel)]="prenom"/>
-    <div *ngIf = "!regEx1.test(prenom)">Corriger le nom</div>
-    <br/>
-    <label>Nom : </label> <input [(ngModel)]="nom"/>
-    <div *ngIf = "!regEx1.test(nom)">Corriger le  prenom</div>
 
-    <br/><label>Adresse : </label> <input [(ngModel)]="adresse"/>
-    <div *ngIf = "!regEx2.test(adresse)">Corriger le champ adresse</div>
-    <br/><label>CodePostal : </label>  <input [(ngModel)]="codePostal"/>
-    <div *ngIf = "!regEx3.test(codePostal)">Corriger le champ code Postal</div>
+  <div class="form-grp">
+    <input type="text" placeholder="Nom" [(ngModel)]="nom"/>
+    <label *ngIf="!regEx1.test(nom)" class="incorrect-field">Champ invalide</label>
+  </div>
 
-    <br/><label>Ville : </label>  <input [(ngModel)]="ville"/>
-    <div *ngIf = "!regEx1.test(ville)">Corriger le champ ville</div>
+  <div class="form-grp">
+    <input type="text" placeholder="Prénom" [(ngModel)]="prenom"/>
+    <label *ngIf="!regEx1.test(prenom)" class="incorrect-field">Champ invalide</label>
+  </div>
 
-    <br/><br/><button [disabled]="!regEx1.test(prenom)&&!regEx1.test(nom)&&!regEx2.test(adresse)&&!regEx3.test(codePostal)&&!regEx1.test(ville)">Enregistrer</button>
+  <div class="form-grp">
+    <input type="text" placeholder="Adresse email" [(ngModel)]="email"/>
+    <label *ngIf="!regEx1.test(prenom)" class="incorrect-field">Champ invalide</label>
+  </div>
+
+  <div class="form-grp">
+    <input placeholder="Adresse" [(ngModel)]="adresse"/>
+    <label *ngIf="!regEx2.test(adresse)" class="incorrect-field">Champ invalide</label>
+  </div>
+
+  <div class="form-grp">
+    <input type="number" placeholder="Code postal" [(ngModel)]="codePostal"/>
+    <label *ngIf="!regEx3.test(codePostal)" class="incorrect-field">Champ invalide</label>
+  </div>
+
+  <div class="form-grp">
+    <input type="text" placeholder="Ville" [(ngModel)]="ville"/>
+    <label *ngIf="!regEx1.test(ville)" class="incorrect-field">Champ invalide</label>
+  </div>
+
+  <div class="form-grp">
+    <input type="password" placeholder="Mot de passe" [(ngModel)]="password" />
+    <label *ngIf="!regEx2.test(password)" class="incorrect-field">Champ invalide</label>
+  </div>
+
+  <div class="form-grp">
+    <input type="password" placeholder="Mot de passe" [(ngModel)]="passwordConf" />
+    <label *ngIf="passwordConf!=password||!regEx2.test(passwordConf)" class="incorrect-field">Champ invalide</label>
+  </div>
+
+  <button [disabled]="!regEx1.test(prenom)&&!regEx1.test(nom)&&!regEx2.test(adresse)&&!regEx3.test(codePostal)&&!regEx1.test(ville)&&!regEx2.test(password)&&passwordConf!=password||!regEx2.test(passwordConf)">Enregistrer</button>
+
 </div>

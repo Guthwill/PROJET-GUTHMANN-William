@@ -26,8 +26,10 @@ const appRoutes: Routes = [
   { path: '', component: CatalogueComponent },
   { path: 'formulaire', component: FormulaireComponent },
   { path: 'connexion', component: ConnexionComponent },
-  { path: 'catalogue', component: CatalogueComponent, canActivate: [AuthGuardGuard]},
-  { path: 'catalogue/:ref', component: DetailArticleComponent, canActivate: [AuthGuardGuard] },
+  { path: 'catalogue', component: CatalogueComponent},
+  { path: 'catalogue/:ref', component: DetailArticleComponent},
+  //{ path: 'catalogue', component: CatalogueComponent, canActivate: [AuthGuardGuard]},
+  //{ path: 'catalogue/:ref', component: DetailArticleComponent, canActivate: [AuthGuardGuard] },
   { path: 'panier', component: PanierComponent }
 ]
 

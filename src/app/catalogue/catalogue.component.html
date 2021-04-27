@@ -5,7 +5,7 @@
   <input type="search" placeholder="Rechercher..." [(ngModel)]="searchText" />
   <ul>
     <app-article
-      *ngFor="let article of articles$!; let i = index"
+      *ngFor="let article of apiArticles$! | async; let i = index"
       [articleRef]='article.ref'
       [articleName]='article.name'
       [articlePrice]='article.price'

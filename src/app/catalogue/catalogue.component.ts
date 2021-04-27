@@ -20,14 +20,29 @@ export class CatalogueComponent implements OnInit {
 
   searchText: string = "";
 
+
+  apiArticles$!: Observable<any>;
+
   constructor(private articleService: ArticleService) { }
+  // ngOnInit(): void {
+  //   this.articleSubscription = this.articleService.articleSubject.subscribe(
+  //     (articles: Article[]) => {
+  //       this.articles$! = articles;
+  //     }
+  //   );
+  //   this.articleService.emitArticleSubject();
+  // }
+
+  // ngOnInit(): void {
+  //   this.articleSubscription = this.articleService.getArticles().subscribe(
+  //     (articles: Article[]) => {
+  //       this.articles$! = articles;
+  //     }
+  //   );
+  //   this.articleService.emitArticleSubject();
+  // }
 
   ngOnInit(): void {
-    this.articleSubscription = this.articleService.articleSubject.subscribe(
-      (articles: Article[]) => {
-        this.articles$! = articles;
-      }
-    );
-    this.articleService.emitArticleSubject();
+    this.apiArticles$! = this.articleService.getArticles();
   }
 }

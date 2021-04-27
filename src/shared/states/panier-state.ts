@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action, State, StateContext, Selector } from '@ngxs/store'
 import { AddArticle, RemoveArticle } from '../actions/panier.action'
 import { Article } from '../models/article';
-import { PanierStateModel } from './article-panier-model';
+import { PanierStateModel } from './panier-state-model';
 
 @State<PanierStateModel>(
   {
@@ -31,7 +31,7 @@ export class PanierState {
     { getState, patchState }: StateContext<PanierStateModel>,
     { payload }: AddArticle) {
     const state = getState();
-    console.log(payload);
+    // console.log(payload);
     patchState({
       panier: [...state.panier, payload]
     });

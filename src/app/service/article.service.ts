@@ -1,7 +1,13 @@
-import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Subject, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { Article } from '../../shared/models/article'
 
+@Injectable({providedIn: 'root'})
 export class ArticleService {
+
+  constructor(private httpClient: HttpClient) { }
 
   articleSubject = new Subject<Article[]>();
 
@@ -28,6 +34,11 @@ export class ArticleService {
     },
   ];
 
+  public getArticles(): Observable<any> {
+    console.log(this.httpClient.get<any>(environment.baseUrl+'/api/catalogue'));
+    return this.httpClient.get<any>(environment.baseUrl+'/api/catalogue');
+  }
+
   emitArticleSubject() {
     this.articleSubject.next(this.articles.slice());
   }
@@ -41,5 +52,4 @@ export class ArticleService {
 
     return article;
   }
-
 }
