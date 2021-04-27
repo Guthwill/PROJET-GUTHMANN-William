@@ -36,16 +36,6 @@ export class PanierState {
       panier: [...state.panier, payload]
     });
   }
-
-  // @Action(RemoveArticle)
-  // del(
-  //   { getState, patchState }: StateContext<PanierStateModel>,
-  //   { payload }: RemoveArticle) {
-  //   const state = getState();
-  //   // TODO : Supprimer la référence passée en paramètre
-  //   patchState({ panier: [...state.panier] });
-  // }
-
   @Action(RemoveArticle)
   del(
     { getState, patchState }: StateContext<PanierStateModel>,

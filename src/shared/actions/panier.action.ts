@@ -8,7 +8,5 @@ export class AddArticle {
 
 export class RemoveArticle {
   static readonly type = "[Article] Remove";
-
-  // constructor(public payload: Article) {}
   constructor(public payload: string) {}
 }
